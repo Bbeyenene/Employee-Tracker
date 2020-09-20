@@ -1,1 +1,36 @@
-# Employee-Tracker
+# Employee-Tracker  
+## Description
+   [Bbeyenene](https://github.com/Bbeyenene) is the developer of this app. 
+   ## Table of Contents
+   * [Installation Instructions](#installation-instructions)
+   
+   * [Usage Instructions](#usage-instructions)
+   
+   * [Contribution](#Contribution)
+   
+   * [Developers Contact Information](#Developers-Contact-Information)
+     
+  * [License](#license)
+
+   ## Installation Instructions
+   The developer is authorizing a free installation by cloning from the code [Bbeyenene/Employee-Tracker](https://github.com/Bbeyenene/Employee-tracker).
+   ## Usage Instructions
+   1. Copy the code from the code [Bbeyenene/Employee-Information-Template-Engine](https://github.com/Bbeyenene/Employee-Tracker) and clone it in your in your comand line.
+   2. Make sure node and npm is installed in your computer.
+   3. Once in the directory run npm install to install the node_modules needed to run the app.
+   4. Then Run node app.js to perform task based on the inquirer prompt.
+   
+   ## Image of the generated webpage
+   ![Employee tracker](#)
+
+  [Click me for video demonstration](#)
+
+   ## Contributiion
+   [Bbeyenene](https://github.com/Bbeyenene) is the only contrubuter to this project.
+   
+   ## Developers Contact Information
+   * LinkdIn Profile: [Berhane](https://www.linkedin.com/in/berhane-beyene/)
+   * URL : 
+   * Email: monoxica2004@yahoo.com
+   ## License
+   This application is licensed under [![License:MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT).
