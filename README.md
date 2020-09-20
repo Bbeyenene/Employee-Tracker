@@ -25,7 +25,7 @@
 
   [Click me for video demonstration](#)
 
-   ## Contributiion
+   ## Contribution
    [Bbeyenene](https://github.com/Bbeyenene) is the only contrubuter to this project.
    
    ## Developers Contact Information
