@@ -17,5 +17,14 @@ const connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err
     console.log("Connected as Id: " + connection.threadId)
-    //startPrompt();
+    startPrompt();
  });
+
+ //function startPrompt(){inquirer.prompt().then(answer => {..code..});
+function startPrompt() {
+  inquirer.prompt( 
+    //prompts
+  ).then(answer => {
+    console.log(answer)
+  })
+}
