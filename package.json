@@ -1,0 +1,24 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "This package is need to run the app",
+  "main": "app.js",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.0.3",
+    "mysql": "^2.17.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bbeyenene/Employee-Tracker.git"
+  },
+  "author": "Berhane Beyene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bbeyenene/Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/Bbeyenene/Employee-Tracker#readme"
+}
