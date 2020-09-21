@@ -22,9 +22,24 @@ connection.connect(function(err) {
 
  //function startPrompt(){inquirer.prompt().then(answer => {..code..});
 function startPrompt() {
-  inquirer.prompt( 
-    //prompts
-  ).then(answer => {
+  inquirer.prompt([
+    {
+      type: "list",
+      message: "What would you like to do?",
+      name: "choice",
+      choices: [
+        "View All Employees?",
+        "View All Employee's By Roles?",
+        "View all Emplyees By Deparments", 
+        "Add Employee?",
+        "Update Employee?",
+        "Add Role?",
+        "Add Department?",
+        "Lay Off Employee",
+        "Employee Badget?"
+      ]
+    }
+  ]).then(answer => {
     console.log(answer)
   })
 }
