@@ -75,7 +75,17 @@ function startPrompt() {
 
       case "Employee Badget?":
         employeeBuget();
-         
+
     }
+  })
+}
+
+//case 1. View All Employees?
+function viewAllEmployees() {
+  var query = "SELECT employeeT.id, employeeT.first_name, employeeT.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employeeT INNER JOIN  role on role.id = employeeT.role_id INNER JOIN department on department.id = role.department_id left join employeeT e on employeeT.manager_id = e.id;"
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
   })
 }
