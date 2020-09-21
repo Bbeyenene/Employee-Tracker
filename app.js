@@ -154,3 +154,27 @@ function addEmployee() {
       })
   })
 }
+
+//case 4. choieces 1
+var roleArr = [];
+function selectRole() {
+  connection.query("SELECT * FROM role", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      roleArr.push(res[i].title);
+    }
+  })
+  return roleArr;
+}
+
+//case 4. choice 2
+var managersArr = [];
+function selectManager() {
+  connection.query("SELECT first_name, last_name FROM employeeT WHERE manager_id IS NULL", function(err, res) {
+    if (err) throw err
+    for (var i = 0; i < res.length; i++) {
+      managersArr.push(res[i].first_name);
+    }
+  })
+  return managersArr;
+}
