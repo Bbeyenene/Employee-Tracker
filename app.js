@@ -40,6 +40,42 @@ function startPrompt() {
       ]
     }
   ]).then(answer => {
-    console.log(answer)
+    //call a particular functions based on the answer selected from the choice above
+    switch (answer.choice) {
+      case "View All Employees?":
+        viewAllEmployees();
+        break;
+
+      case "View All Employee's By Roles?":
+        viewAllRoles();
+        break;
+
+      case "View all Emplyees By Deparments":
+        viewAllDepartments();
+        break;
+
+      case "Add Employee?":
+        addEmployee();
+        break;
+
+      case "Update Employee?":
+        updateEmployeeRole();
+        break;
+
+      case "Add Role?":
+        addRole();
+        break;  
+
+      case "Add Department?":
+        addDepartment();
+        break;
+
+      case "Lay Off Employee":
+        fireEmployee();
+
+      case "Employee Badget?":
+        employeeBuget();
+         
+    }
   })
 }
