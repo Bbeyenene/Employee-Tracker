@@ -89,3 +89,13 @@ function viewAllEmployees() {
     startPrompt();
   })
 }
+
+//case 2. View All Employee's By Roles?
+function viewAllRoles() {
+  var query = "SELECT employeeT.first_name, employeeT.last_name, role.title AS Title FROM employeeT JOIN role ON employeeT.role_id = role.id;";
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  })
+}
