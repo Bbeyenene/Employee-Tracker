@@ -178,3 +178,24 @@ function selectManager() {
   })
   return managersArr;
 }
+
+//7
+function updateEmployeeRole() {
+  inquirer.prompt([
+    {
+      name: "name",
+      type: "input",
+      message: "which employee would you like to update? (use first name only for now)"
+    }, 
+    {
+      message: "enter the new role ID:",
+      type: "number",
+      name: "role_id"
+    }
+  ]).then(function (response) {
+    connection.query("UPDATE employeeT SET role_id = ? WHERE first_name = ?", [response.role_id, response.name], function (err, data) {
+    console.table(data);
+    })
+    startPrompt();
+  })
+}
