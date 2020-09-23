@@ -252,3 +252,17 @@ function addDepartment() {
     )
   })
 }
+
+//case 8. deleting employee
+function fireEmployee() {
+  inquirer.prompt(
+    {
+      name: "employee_id",
+      type: "number",
+      message: "Enter employee's id to be deleted?"
+    }
+  ).then(function (res) {
+    connection.query("DELETE FROM employeeT WHERE id= ?", res.employee_id)
+    startPrompt();
+  })
+}
