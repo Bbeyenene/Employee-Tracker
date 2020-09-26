@@ -21,7 +21,7 @@
    4. Then Run node app.js to perform task based on the inquirer prompt.
    
    ## Image of the comandline application demo
-   ![Employee tracker](Images/E-T.png)
+   ![Employee tracker](Images/ET.png)
 
   [Click me for video demonstration](#)
 
