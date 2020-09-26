@@ -309,7 +309,7 @@ function fireEmployee() {
       const element = resId[index].first_name;
       array.push(element)
     }
-    console.log(array)
+    //console.log(array)
   inquirer.prompt(
     {
       name: "employeeName",
