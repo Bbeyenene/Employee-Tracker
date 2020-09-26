@@ -41,7 +41,7 @@ VALUE ("Recruiter", 190000, 4);
 
 -- EMPLOYEE SEEDS -------
 INSERT INTO employeeT (first_name, last_name, manager_id, role_id)
-VALUE ("Mary", "William", null, 2);
+VALUE ("Jack", "Anderson", null, 1);
 
 INSERT INTO employeeT (first_name, last_name, manager_id, role_id)
 VALUE ("Mary", "William", null, 2);
