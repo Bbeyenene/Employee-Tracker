@@ -1,14 +1,14 @@
 //Dependencies
 const inquirer = require("inquirer")
 const mysql = require("mysql")
-const cTable = require('console.table');
+const myTable = require('console.table');
 
 //creatiog a connection btween database and localhost using port 3306
 const connection = mysql.createConnection({
     host: "Localhost",
     port: 3306,
     user: "root",
-    password: "",
+    password: "Nathan@2015",
     database: "employee_trackerDB"
   });
 
@@ -36,7 +36,8 @@ function startPrompt() {
         "Add Role?",
         "Add Department?",
         "Lay Off Employee",
-        "Employee Badget?"
+        "Employee Badget?",
+        "Exit"
       ]
     }
   ]).then(answer => {
@@ -72,9 +73,12 @@ function startPrompt() {
 
       case "Lay Off Employee":
         fireEmployee();
-
+        break;
       case "Employee Badget?":
         employeeBuget();
+        break;
+      case "Exit":
+        exitTracker();
 
     }
   })
@@ -82,10 +86,12 @@ function startPrompt() {
 
 //case 1. View All Employees?
 function viewAllEmployees() {
-  var query = "SELECT employeeT.id, employeeT.first_name, employeeT.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employeeT INNER JOIN  role on role.id = employeeT.role_id INNER JOIN department on department.id = role.department_id left join employeeT e on employeeT.manager_id = e.id;"
+  var query = "SELECT employeeT.id, employeeT.first_name, employeeT.last_name, role.title, role.salary, department.name AS Department, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employeeT INNER JOIN  role on role.id = employeeT.role_id INNER JOIN department on department.id = role.department_id left join employeeT e on employeeT.manager_id = e.id;"
   connection.query(query, function(err, res) {
     if (err) throw err;
+    console.log('___________________________________________________________________________________________')
     console.table(res);
+    console.log('___________________________________________________________________________________________')
     startPrompt();
   })
 }
@@ -95,7 +101,9 @@ function viewAllRoles() {
   var query = "SELECT employeeT.first_name, employeeT.last_name, role.title AS Title FROM employeeT JOIN role ON employeeT.role_id = role.id;";
   connection.query(query, function(err, res) {
     if (err) throw err;
+    console.log('________________________________________________')
     console.table(res);
+    console.log('________________________________________________')
     startPrompt();
   })
 }
@@ -181,22 +189,62 @@ function selectManager() {
 
 //case 5. Update employee
 function updateEmployeeRole() {
-  inquirer.prompt([
-    {
-      name: "name",
-      type: "input",
-      message: "which employee would you like to update? (use first name only for now)"
-    }, 
-    {
-      message: "enter the new role ID:",
-      type: "number",
-      name: "role_id"
+  var query1 = (
+    "SELECT e.first_name, e.last_name, e.id," + 
+    "CONCAT(e.first_name, ' ', e.last_name) AS full_Name " + 
+    "FROM employeeT AS e"
+  );
+  connection.query(query1, function (err, resN) {
+    if (err) throw err;
+    // collect all the response full name into an array to be used by as achoice list for the prompt
+    var employeeNaneArr = [];
+    for (var i = 0; i < resN.length; i++) {
+      employeeNaneArr.push(resN[i].full_Name);
     }
-  ]).then(function (response) {
-    connection.query("UPDATE employeeT SET role_id = ? WHERE first_name = ?", [response.role_id, response.name], function (err, data) {
-    console.table(data);
+    inquirer.prompt(
+      [{
+        name: "employeeName",
+        type: "list",
+        message: "Name of employee to update?",
+        choices: employeeNaneArr
+      }]
+    ).then(function (resName) {
+      // if a name to update is selected then; 
+      //collect role titles from the query to be used as an araray choices for role prompt
+      connection.query("SELECT r.title, r.id FROM role AS r", function (err, resR) {
+        if (err) throw err;
+        var roleTitlesArr = [];
+        for (var i = 0; i < resR.length; i++) {
+            roleTitlesArr.push(resR[i].title);
+        }
+        inquirer.prompt(
+          [{
+            name: "titleRole",
+            type: "list",
+            message: "Select the new role!",
+            choices: roleTitlesArr
+          }]
+      ).then(function (resRole) {
+        //for each response  asign the preupdated employee id to that particular person updated.
+        resN.forEach(person => {
+          if (resName.employeeName === person.full_Name) {
+              employeeID = person.id;
+          }
+        });
+        var roleID = 0;
+        resR.forEach(position => {
+            if (position.title === resRole.titleRole) {
+                roleID = position.id;
+            }
+        })
+        connection.query("UPDATE employeeT SET role_id=(?) WHERE id=(?)", [roleID, employeeID], function (err3, res3) {
+            if (err3) throw err3;
+            console.log(`${resName.employeeName}'s role is updated to ${resRole.titleRole}.`);
+            startPrompt();
+          })
+        })
+      })
     })
-    startPrompt();
   })
 }
 
@@ -255,16 +303,28 @@ function addDepartment() {
 
 //case 8. deleting employee
 function fireEmployee() {
+  connection.query("SELECT * FROM employeeT", function (err, resId){
+    var array = [];
+    for (let index = 0; index < resId.length; index++) {
+      const element = resId[index].first_name;
+      array.push(element)
+    }
+    console.log(array)
   inquirer.prompt(
     {
-      name: "employee_id",
-      type: "number",
-      message: "Enter employee's id to be deleted?"
+      name: "employeeName",
+      type: "list",
+      message: "Enter employee's id to be deleted?",
+      choices: array
     }
-  ).then(function (res) {
-    connection.query("DELETE FROM employeeT WHERE id= ?", res.employee_id)
+  ).then(function (answer) {
+    connection.query("DELETE FROM employeeT WHERE first_name= ?", answer.employeeName)
+    console.log("\n" + answer.employeeName + " is successfuly fired!\n")
+    
     startPrompt();
   })
+})
+
 }
 
 //case 9. employee budget
@@ -300,4 +360,8 @@ function employeeBuget() {
       startPrompt();
     })
   })
+}
+
+function exitTracker() {
+  connection.end();
 }
