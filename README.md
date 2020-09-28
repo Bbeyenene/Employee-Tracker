@@ -23,7 +23,7 @@
    ## Image of the comandline application demo
    ![Employee tracker](Images/ET.png)
 
-  [Click me for video demonstration](#)
+  [Click me for video demonstration]( https://drive.google.com/file/d/1SWeJ-HDtcIgX3P7DK_iUAt4ylXWVlKc6/view?usp=sharing)
 
    ## Contribution
    [Bbeyenene](https://github.com/Bbeyenene) is the only contrubuter to this project.
